@@ -3,12 +3,16 @@ import { SideNav } from "../../components/SideNav";
 import { ExpensesApiContext } from "../../api/ExpensesApiProvider";
 import { WalletApiContext } from "../../api/WalletApiProvider";
 import { Outlet, useNavigate } from "react-router-dom";
+import { ApiContext } from "../../api/ApiProvider";
 
 const Dashboard = () => {
   const [user, setUser] = useState({});
-  const { indexExpenses } = useContext(ExpensesApiContext);
-  const { indexWallet } = useContext(WalletApiContext);
-  const api = { indexExpenses, indexWallet };
+  const { indexExpenses , storeExpenses , deleteExpenses} = useContext(ExpensesApiContext);
+  const { indexWallet , showWallet , updateWallet , deleteWallet  ,createWallet} = useContext(WalletApiContext);
+  const {indexCategory} = useContext(ApiContext)
+
+  const api = { indexExpenses, indexWallet , indexCategory , storeExpenses , 
+    deleteExpenses , showWallet , updateWallet , deleteWallet , createWallet};
   const navigate = useNavigate();
 
   useEffect(() => {

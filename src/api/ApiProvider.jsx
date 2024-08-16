@@ -42,16 +42,30 @@ export const ApiProvider = ({ children }) => {
       return null;
     }
   };
-
-
   const logout = () => {
     localStorage.clear()
   };
 
+  /**CATEGORY API */
+  const indexCategory = async (token) => {
+    try {
+      const response = await axios.get(`${API_URL}/api/category`, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+
+      const data = response.data.data
+      return data
+    }catch (error) {
+      console.error('error fetch expense : ' , error) 
+    }
+  }
+
 
 
   return (
-    <ApiContext.Provider value={{ login, logout , register }}>
+    <ApiContext.Provider value={{ login, logout , register , indexCategory }}>
       {children}
     </ApiContext.Provider>
   );

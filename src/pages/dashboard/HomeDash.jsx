@@ -7,8 +7,7 @@ const HomeDash = () => {
 
   const { user, api } = useOutletContext(); 
 
-  const displayedExpenses =
-    expenses.length > 3 ? expenses.slice(0, 3) : expenses;
+  const displayedExpenses = expenses.length > 3 ? expenses.slice(0, 3) : expenses;
   const displayedWallet = wallet.length > 3 ? wallet.slice(0, 3) : wallet;
 
   const token = localStorage.getItem("token");
@@ -103,7 +102,7 @@ const HomeDash = () => {
 
         <div>
           <section className="bg-slate-100 h-80 w-[100%] rounded-3xl p-10 mt-12 relative">
-            <p className="font-medium text-3xl mb-4">Recent Wallet</p>
+            <p className="font-medium text-3xl mb-4">My Wallet</p>
 
             {displayedWallet.length > 0 ? (
               <ul>
