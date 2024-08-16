@@ -7,12 +7,12 @@ import { ApiContext } from "../../api/ApiProvider";
 
 const Dashboard = () => {
   const [user, setUser] = useState({});
-  const { indexExpenses , storeExpenses , deleteExpenses} = useContext(ExpensesApiContext);
+  const { indexExpenses , storeExpenses , deleteExpenses , showExpense , updateExpenses} = useContext(ExpensesApiContext);
   const { indexWallet , showWallet , updateWallet , deleteWallet  ,createWallet} = useContext(WalletApiContext);
   const {indexCategory} = useContext(ApiContext)
 
   const api = { indexExpenses, indexWallet , indexCategory , storeExpenses , 
-    deleteExpenses , showWallet , updateWallet , deleteWallet , createWallet};
+    deleteExpenses , showWallet , updateWallet , deleteWallet , createWallet , showExpense , updateExpenses};
   const navigate = useNavigate();
 
   useEffect(() => {

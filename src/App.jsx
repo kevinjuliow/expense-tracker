@@ -13,7 +13,7 @@ import CreateExpense from "./pages/dashboard/CreateExpense";
 import Wallet from "./pages/dashboard/Wallet";
 import ShowWallet from "./pages/dashboard/ShowWallet";
 import CreateWallet from "./pages/dashboard/CreateWallet";
-
+import UpdateExpense from "./pages/dashboard/UpdateExpense";
 
 function App() {
   return (
@@ -32,18 +32,15 @@ function App() {
                     <Dashboard />
                   </ProtectedRoutes>
                 }
-                
               >
-                 <Route path="home" element={<HomeDash />} />
-                 <Route path="expenses" element={<Expenses />}/>
-                 <Route path="wallet" element={<Wallet />}/>
-                 <Route path="wallet/create" element={<CreateWallet />}/>
-                 <Route path="wallet/:id" element={<ShowWallet/>}/>
-                 <Route path="expenses/create" element={<CreateExpense />}/>
-                
+                <Route path="home" element={<HomeDash />} />
+                <Route path="expenses" element={<Expenses />} />
+                <Route path="wallet" element={<Wallet />} />
+                <Route path="wallet/create" element={<CreateWallet />} />
+                <Route path="wallet/:id" element={<ShowWallet />} />
+                <Route path="expenses/create" element={<CreateExpense />} />
+                <Route path="expenses/:id" element={<UpdateExpense />} />
               </Route>
-             
-            
             </Routes>
           </WalletApiProvider>
         </ExpensesApiProvider>

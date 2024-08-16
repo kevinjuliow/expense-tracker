@@ -26,26 +26,28 @@ const ExpensesApiProvider = ({children}) => {
     }
   }
 
-  const storeExpenses = async (token , name , category_id , ammount , time) => {
+  const storeExpenses = async (token, name, category_id, amount, time, id) => {
     try {
-      const response = await axios.post(`${API_URL}/api/expense`,{
-        "name" : name , 
-        "category_id" : category_id , 
-        "ammount" : ammount , 
-        "time" : time
-      } ,{
+     
+      const formattedAmount = parseFloat(amount).toFixed(2);
+  
+      const response = await axios.post(`${API_URL}/api/wallet/${id}/expense`, {
+        "name": name,
+        "category_id": parseInt(category_id, 10),
+        "amount": formattedAmount,
+        "time": time 
+      }, {
         headers: {
           Authorization: `Bearer ${token}`
         }
       });
-
+  
       console.log(response.data);
-      navigate('/dashboard/expenses')
-    
-    }catch (error) {
-      console.error('error fetch expense : ' , error) 
+      navigate('/dashboard/expenses');
+    } catch (error) {
+      console.error('Error creating expense:', error.response?.data || error.message);
     }
-  }
+  };
 
   const deleteExpenses = async (token , id) =>{
     try {
@@ -62,8 +64,48 @@ const ExpensesApiProvider = ({children}) => {
     }
   }
 
+  const showExpense = async (token , id) =>{
+    try {
+      const response = await axios.get(`${API_URL}/api/expense/${id}`,{
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+      const data = response.data;
+      return data
+    
+    }catch (error) {
+      console.error('error : ' , error) 
+    }
+  }
+
+  const updateExpenses = async (token, name, category_id, amount, time, id) => {
+    try {
+     
+      const formattedAmount = parseFloat(amount).toFixed(2);
+  
+      const response = await axios.put(`${API_URL}/api/expense/${id}`, {
+        "name": name,
+        "category_id": parseInt(category_id, 10),
+        "amount": formattedAmount,
+        "time": time 
+      }, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+  
+      console.log(response.data);
+      navigate('/dashboard/expenses');
+    } catch (error) {
+      console.error('Error creating expense:', error.response?.data || error.message);
+    }
+  };
+
+  
+
   return (
-    <ExpensesApiContext.Provider value={{ indexExpenses , storeExpenses , deleteExpenses}}>
+    <ExpensesApiContext.Provider value={{ indexExpenses , storeExpenses , deleteExpenses , showExpense , updateExpenses}}>
       {children}
     </ExpensesApiContext.Provider>
   )
